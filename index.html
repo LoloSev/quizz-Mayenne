@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Mayenne</title>
+
+<style>
+body {font-family: Arial; background:#eef5ee; text-align:center; padding:20px;}
+.container {background:white; padding:20px; border-radius:15px; max-width:420px; margin:auto;}
+
+button {
+  width:100%;
+  margin:10px 0;
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  background:#2e7d32;
+  color:white;
+  font-size:16px;
+}
+
+#timer {font-weight:bold; color:#d32f2f;}
+
+.bar-bg {background:#ddd;border-radius:10px;overflow:hidden;margin-bottom:10px;}
+.bar {height:10px;width:100%;background:#2e7d32;}
+.progress-bar {background:#1976d2;height:10px;width:0%;}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>🏞️ Quiz Mayenne</h2>
+
+<button onclick="toggleSound()" id="soundBtn">🔊 Son activé</button>
+
+<p id="timer">⏱️ 90</p>
+
+<div class="bar-bg"><div id="timeBar" class="bar"></div></div>
+<div class="bar-bg"><div id="progressBar" class="progress-bar"></div></div>
+
+<p id="question"></p>
+<div id="answers"></div>
+<p id="progress"></p>
+
+</div>
+
+<!-- Sons réponses -->
+<audio id="goodSound" src="good.mp3"></audio>
+<audio id="badSound" src="bad.mp3"></audio>
+
+<!-- Sons résultats -->
+<audio id="failSound" src="fail.mp3"></audio>
+<audio id="mehSound" src="meh.mp3"></audio>
+<audio id="niceSound" src="nice.mp3"></audio>
+<audio id="greatSound" src="great.mp3"></audio>
+<audio id="legendSound" src="legend.mp3"></audio>
+
+<script>
+
+let soundEnabled = true;
+
+function toggleSound(){
+  soundEnabled = !soundEnabled;
+  document.getElementById("soundBtn").innerText =
+    soundEnabled ? "🔊 Son activé" : "🔇 Son coupé";
+}
+
+const quiz = [
+{q:"Quelle est la préfecture du département de la Mayenne ?",a:["Mayenne","Laval","Évron","Château-Gontier"],correct:1},
+{q:"En quelle année la Mayenne est-elle devenue un département ?",a:["1789","1790","1791","1792"],correct:1},
+{q:"Quelle rivière traverse le département de la Mayenne du nord au sud ?",a:["Sarthe","Mayenne","Oudon","Erve"],correct:1},
+{q:"Quel peintre naïf, surnommé le « Douanier », est né à Laval ?",a:["Henri Rousseau","Claude Monet","Paul Gauguin","Pierre-Auguste Renoir"],correct:0},
+{q:"Quel fromage est historiquement lié à la région ?",a:["Camembert","Roquefort","Port-Salut","Comté"],correct:2},
+
+{q:"Quel château de la Mayenne est construit sur un éperon rocheux dominant la vallée de l’Erve ?",a:["Château de Laval","Château de Sainte-Suzanne","Château de Lassay","Château de Mayenne"],correct:1},
+{q:"Quelle forêt de la Mayenne est l’une des plus grandes de la région ?",a:["Forêt de Mayenne","Forêt de Pail","Forêt de Fontainebleau","Forêt de Brocéliande"],correct:1},
+{q:"Pendant quelle période la Mayenne a-t-elle été marquée par la révolte des Chouans ?",a:["Guerre de Cent Ans","Révolution française","Première Guerre mondiale","Guerre de Trente Ans"],correct:1},
+{q:"Quelle basilique de la Mayenne est un important lieu de pèlerinage marial ?",a:["Basilique de Pontmain","Basilique Notre-Dame d’Avesnières","Basilique de Lisieux","Basilique du Sacré-Cœur"],correct:0},
+{q:"Combien de communes compte approximativement le département de la Mayenne ?",a:["150","242","380","520"],correct:2},
+{q:"Quelle industrie a longtemps été importante à Laval et dans sa région ?",a:["Sidérurgie","Construction navale","Textile et toile","Automobile"],correct:2},
+{q:"Quel village est classé parmi 'Les Plus Beaux Villages de France' ?",a:["Évron","Sainte-Suzanne","Lassay-les-Châteaux","Jublains"],correct:1},
+{q:"Quelle ville gallo-romaine se trouvait à Jublains ?",a:["Lutetia","Noviodunum","Condate","Aremorica"],correct:1},
+{q:"Quel ingénieur est à l’origine d’un canal en Mayenne ?",a:["Vauban","Riquet","Bazin","Mansart"],correct:2},
+
+{q:"Combien de tours possède le château de Lassay ?",a:["4","6","8","12"],correct:2},
+{q:"Quels départements entourent la Mayenne ?",a:["Orne, Sarthe, Maine-et-Loire, Ille-et-Vilaine","Calvados, Eure, Sarthe","Manche, Orne, Sarthe","Vendée, Loire-Atlantique"],correct:0},
+{q:"La Mayenne est réputée pour l’élevage de chevaux appartenant à quelle discipline ?",a:["Galop et trot","Dressage uniquement","Saut d’obstacles uniquement","Endurance"],correct:0},
+{q:"Quel grand mammifère est présent dans certaines forêts locales ?",a:["Loup","Lynx","Cerf","Ours"],correct:2},
+{q:"Quel écrivain a écrit « Poil de Carotte » et a vécu en Mayenne ?",a:["Jules Renard","Maupassant","Zola","Daudet"],correct:0},
+{q:"Quelle ville de la Mayenne est connue pour son château médiéval dominant la rivière du même nom ?",a:["Laval","Mayenne","Château-Gontier","Évron"],correct:1}
+];
+
+let current=0, score=0, time=90;
+let interval;
+
+function startTimer(){
+ let totalTime = time;
+ interval=setInterval(()=>{
+  time--;
+  document.getElementById("timer").innerText="⏱️ "+time;
+  let percent = (time / totalTime) * 100;
+  document.getElementById("timeBar").style.width = percent + "%";
+  if(time<=0){ clearInterval(interval); showResult(); }
+ },1000);
+}
+
+function loadQuestion(){
+ if(current===0) startTimer();
+ document.getElementById("question").innerText=quiz[current].q;
+ document.getElementById("progress").innerText=(current+1)+"/"+quiz.length;
+ let progressPercent = (current / quiz.length) * 100;
+ document.getElementById("progressBar").style.width = progressPercent + "%";
+ const div=document.getElementById("answers");
+ div.innerHTML="";
+ quiz[current].a.forEach((a,i)=>{
+  const b=document.createElement("button");
+  b.innerText=a;
+  b.onclick=()=>selectAnswer(i);
+  div.appendChild(b);
+ });
+}
+
+function playSound(id){
+  if(!soundEnabled) return;
+  let s = document.getElementById(id);
+  s.currentTime = 0;
+  s.play();
+}
+
+function selectAnswer(i){
+ const buttons = document.querySelectorAll("#answers button");
+ buttons.forEach((btn,index)=>{
+  btn.disabled=true;
+  if(index === quiz[current].correct){
+    btn.style.background="#2e7d32";
+  } else if(index === i){
+    btn.style.background="#d32f2f";
+  }
+ });
+
+ if(i === quiz[current].correct){
+  score++;
+  playSound("goodSound");
+ } else {
+  playSound("badSound");
+ }
+
+ setTimeout(()=>{
+  current++;
+  if(current < quiz.length){ loadQuestion(); }
+  else { clearInterval(interval); showResult(); }
+ },600);
+}
+
+function getMessage(score){
+ if(score <= 6) return {text:"😅 Touriste complet — Il va falloir revenir en Mayenne…", sound:"failSound"};
+ if(score <= 10) return {text:"🙂 Pas mal — Tu connais les bases, mais tu peux faire mieux", sound:"mehSound"};
+ if(score <= 14) return {text:"👍 Bon niveau — Tu connais vraiment bien la Mayenne", sound:"niceSound"};
+ if(score <= 17) return {text:"🔥 Très solide — Clairement au-dessus de la moyenne", sound:"greatSound"};
+ return {text:"🏆 Légende mayennaise — Respect total, niveau expert", sound:"legendSound"};
+}
+
+function showResult(){
+ let result = getMessage(score);
+
+ if(soundEnabled){
+  playSound(result.sound);
+ }
+
+ document.querySelector(".container").innerHTML = `
+  <h2>Résultat</h2>
+  <h3>${score}/20</h3>
+  <p>${result.text}</p>
+  <button onclick="location.reload()">Rejouer</button>
+ `;
+}
+
+loadQuestion();
+
+</script>
+</body>
+</html>
