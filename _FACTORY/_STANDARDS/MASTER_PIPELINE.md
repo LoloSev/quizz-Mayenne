@@ -2,49 +2,37 @@
 
 ## Objectif
 
-Définir l'orchestration complète de la FACTORY quiz.
+Define the complete FACTORY pipeline.
 
-Pipeline industriel :
+Pipeline :
 1. Documentation
 2. Structuration
-3. Génération
+3. Generation
 4. QA
-5. Assemblage
+5. Assembly
 6. Export
 
 ---
 
-## Phase 1 — Collecte documentaire
+## Phase 1 – Documentation
 
-Entrées :
 - BIB_CDM
-- Sources documentaires
-- Validations humaines
-
-Sorties :
-- BIPREGEN
 - ANGIPREGEN
-- STATS
+- BIPREGEN
 
 ## Checks
 
 ```txt
 CHECK_SOURCE_QUALITY
 CHECK_DUPLICATES_RAW
-CHECK_COVERAGE
 ```
 
 ---
 
-## Phase 2 — Structuration POOLS
+## Phase 2 – Pools
 
-Entrées :
-- ANGIPREGEN
 - POOLS_CDM
-
-Sorties :
-- Pools validés
-- Réservations
+- Reservations
 - Exclusions
 
 ## Checks
@@ -52,113 +40,49 @@ Sorties :
 ```txt
 CHECK_POOL_COLLISIONS
 CHECK_ANGLE_ASSIGNMENT
-CHECK_RESERVATIONS
 ```
 
 ---
 
-## Phase 3 — G�nération IA
+## Phase 3 – Generation I
 
-Entrées :
-- POOLS
-- BIPREGEN
-- QA_RULES
-
-Sorties :
 - Questions
-- Réponses
+- Reponses
 - Tags
-- Métadonnées
 
 ## Checks
 
 ```txt
 CHECK_FORMAT
-CHECK_DISTRACTORS
 CHECK_DIFFICULTY
 ```
 
 ---
 
-## Phase 4 — QA
+## Phase 4 – QA
 
-Entrées :
-- Questions générées
-- QA_RULES
-
-Sorties :
 - QA_STATUS
 - FLAGS
-- REJECTS
-
-## Checks
-
-```txt
-CHECK_WEAK_QUESTIONS
-CHECK_REPEAT_DENSITY
-CHECK_IA_STYLE
-```
 
 ---
 
-## Phase 5 — Assemblage Quiz
+## Phase 5 – Assembly
 
-Entrées :
-- Questions validées
-- QUIZ_ASSEMBLY_RULES
-
-Sorties :
 - Quiz final
-- Ordre de jeu
-- Courbe difficulté
-
-## Checks
-
-```txt
-CHECK_THEME_BALANCE
-CHECK_DIFFICULTY_CURVE
-CHECK_FLOW
-```
+- Difficulty curve
 
 ---
 
-## Phase 6 — Export
+## Phase 6 – Export
 
-Entrées :
-- Quiz final
-- Métadonnées
-
-Sorties :
 - JSON
 - CSV
 - API
-- App
-
-## Checks
-
-```txt
-CHECK_EXPORT_FORMAT
-CHECK_MISSING_FIELDS
-CHECK_CORRUPTION
-```
 
 ---
 
-## Blockages obligatoires
+## Philosophy
 
-L'export final doit être bloqué si :
-- QA_STATUS=FAIL
-- CHECK_POOL_COLLISIONS fail
-- CHECK_FACTORY_FORMAT fail
-- CHECK_DUPLICATES fail
-
----
-
-## Philosophie
-
-La FACTORY devient un :
-- système industriel
-- auditable
-- résilient
-- modulaire
-- automatisable
+- Industrial
+- Auditable
+- Automatable
