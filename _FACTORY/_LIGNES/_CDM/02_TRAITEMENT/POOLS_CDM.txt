@@ -1,302 +1,55 @@
-⚠️ RÈGLE IA — COMPORTEMENT OBLIGATOIRE
-• Fais strictement ce qui est demandé
-• Pas de suggestions non sollicitées
-• Pas de récapitulatifs après chaque action
-• Validation humaine obligatoire avant toute modification
+# POOLS_CDM — VERSION V2
 
----
+## Architecture validée
+- 2 IF-SF
+- 3 IF-ROT
+- 15 QV
+- 277 questions cible
 
-# POOLS_CDM — DÉFINITION DES 20 POOLS
-# Quiz : CDM (Coupe du Monde de Football)
-# Source : ANGIPREGEN_CDM.txt
-# Version : V1 — à valider
-# Statut : Brouillon de travail — QV-13 / QV-14 / QV-15 à finaliser
+## Correctifs structurels
 
----
+### QV-02
+Fusion complète anciens joueurs N2/N3.
 
-# ARCHITECTURE
+### QV-03
+Remplacé par :
+TYPE=DYNASTIES_EQUIPES_MYTHIQUES
 
-| Type  | Pools | Stock/pool | Total |
-|-------|-------|-----------|-------|
-| IF-SF  | 2    | 8Q        | 16Q   |
-| IF-ROT | 3    | 12Q       | 36Q   |
-| QV     | 15   | 15Q       | 225Q  |
-| TOTAL  | 20   |           | 277Q  |
+Objectif :
+- supprimer le pool fragile
+- augmenter la variété documentaire
+- réduire les collisions joueurs
 
-Nomenclature : CDM-POOL-[TYPE]-[N°]
+## Règles anti-collision
+- Une finale IF-SF ne peut pas réapparaître en QV
+- Un angle réservé ne peut être réutilisé
+- Les exclusions doivent être explicites
 
----
+## Format normalisé
 
-# BLOC 1 — INCONTOURNABLES SEMI-FIXES (IF-SF)
-# Rotation très lente — références absolues du thème
+ID=
+TYPE=
+TARGET=
+SOURCE=
+CONTENT_RULE=
+EXCLUDED_POOLS=
+RESERVED_ITEMS=
+NOTES=
 
-## CDM-POOL-IF-SF-01 — Les joueurs légendaires absolus
-Stock cible : 8Q
-Source :
-  JOU-01 (Pelé) — A1, A2, A3, A4 = 4Q
-  JOU-02 (Maradona) — A1, A2, A3, A4 = 4Q
-Total disponible : 8Q ✓
+## Nouveau QV-03
 
-## CDM-POOL-IF-SF-02 — Les finales emblématiques modernes
-Stock cible : 8Q
-Source :
-  MAT-09 (Finale 1998 France-Brésil) — A1, A2, A3 = 3Q
-  MAT-14 (Finale 2018 France-Croatie) — A1, A2, A3 = 3Q
-  MAT-15 (Finale 2022 Argentine-France) — A1, A2 = 2Q
-Total disponible : 8Q ✓
-⚠️ MAT-15 A3 (Duel Messi-Mbappé) écarté — risque conflit avec JOU-03 et JOU-19
+ID=CDM-POOL-QV-03
+TYPE=DYNASTIES_EQUIPES_MYTHIQUES
+TARGET=15
 
----
+Exemples :
+- Brésil 1970
+- Allemagne 1974
+- France 1998
+- Espagne 2010
+- Milan Sacchi
+- Barça Guardiola
+- Ajax 1971
 
-# BLOC 2 — INCONTOURNABLES ROTATIFS (IF-ROT)
-# Rotation lente — incontournables de second rang
-
-## CDM-POOL-IF-ROT-01 — Les grandes nations championnes
-Stock cible : 12Q
-Source :
-  FIN-01 (Allemagne) — A1, A2, A3 = 3Q
-  FIN-02 (Brésil) — A1, A2, A3 = 3Q
-  FIN-03 (Italie) — A1, A2, A3 = 3Q
-  FIN-04 (Argentine) — A1, A2, A3 = 3Q
-  FIN-05 (France) — A1, A2, A3 = 3Q
-Total disponible : 15Q → retenir 12 — 3Q en réserve (pool QV-13)
-
-## CDM-POOL-IF-ROT-02 — Records de buts individuels
-Stock cible : 12Q
-Source :
-  BUT-01 (Klose 16 buts) — A1, A2, A3, A4 = 4Q
-  BUT-02 (Ronaldo 15 buts) — A1, A2, A3 = 3Q
-  BUT-05 (Messi 13 buts) — A1, A2, A3 = 3Q
-  BUE-09 (Mbappé hat-trick 2022) — A1, A2, A3 = 3Q
-Total disponible : 13Q → retenir 12 — 1Q en réserve (pool QV-13)
-⚠️ BUT-06 (Pelé 12 buts) et BUT-07 (Mbappé 12 buts) écartés — conflit avec IF-SF-01 et QV-01 → placés en QV-07
-
-## CDM-POOL-IF-ROT-03 — Anecdotes et polémiques célèbres
-Stock cible : 12Q
-Source :
-  ANE-09 (Schumacher-Battiston) — A1, A2, A3 = 3Q
-  ANE-10 (Main de Dieu + But du siècle) — A1, A2, A3 = 3Q
-  ANE-11 (Baggio raté) — A1, A2, A3 = 3Q
-  ANE-13 (Zidane expulsé) — A1, A2, A3 = 3Q
-  ANE-14 (Paul le Poulpe) — A1, A2, A3 = 3Q
-Total disponible : 15Q → retenir 12 — 3Q en réserve (pool QV-14)
-
----
-
-# BLOC 3 — QUESTIONS VARIABLES (QV)
-# Rotation rapide — variété thématique
-
-## CDM-POOL-QV-01 — Joueurs modernes N1
-Stock cible : 15Q
-Source :
-  JOU-03 (Messi) — A1, A2, A3, A4 = 4Q
-  JOU-04 (Cristiano Ronaldo) — A1, A2, A3 = 3Q
-  JOU-06 (Zidane) — A1, A2, A3 = 3Q
-  JOU-08 (Ronaldo Nazário) — A1, A2, A3 = 3Q
-  JOU-19 (Mbappé) — A1, A2, A3, A4 = 4Q
-Total disponible : 17Q → retenir 15 — 2Q en réserve (pool QV-13)
-⚠️ Angles BUT/BUE de Mbappé exclus — réservés IF-ROT-02 et QV-07
-
-## CDM-POOL-QV-02 — Joueurs N2 stars
-Stock cible : 15Q
-Source :
-  JOU-05 (Cruyff) — A1, A2, A3 = 3Q
-  JOU-07 (Beckenbauer) — A1, A2, A3, A4 = 4Q
-  JOU-09 (Platini) — A1, A2, A3, A4 = 4Q
-  JOU-11 (Klose) — A1, A2, A3 = 3Q
-  JOU-17 (Matthäus) — A1, A2, A3, A4 = 4Q
-Total disponible : 18Q → retenir 15 — 3Q en réserve (pool QV-13)
-⚠️ JOU-11 angle BUT exclu — réservé CDM-BUT-01 (QV-07)
-⚠️ JOU-17 angle REC exclu — réservé CDM-REC-01 (QV-12)
-
-## CDM-POOL-QV-03 — Joueurs historiques N2-N3
-Stock cible : 15Q
-Source :
-  JOU-10 (Di Stéfano) — A1, A2 = 2Q
-  JOU-12 (Just Fontaine) — A1, A2, A3 = 3Q
-  JOU-13 (Paolo Rossi) — A1, A2, A3 = 3Q
-  JOU-14 (Gerd Müller) — A1, A2, A3 = 3Q
-  JOU-15 (Garrincha) — A1, A2, A3 = 3Q
-  JOU-16 (Bobby Charlton) — A1, A2, A3 = 3Q
-Total disponible : 17Q → retenir 15
-⚠️ JOU-12 angle BUE exclu — réservé CDM-BUE-01 (QV-08)
-⚠️ JOU-14 angle BUT exclu — réservé CDM-BUT-03 (QV-07)
-
-## CDM-POOL-QV-04 — Matchs emblématiques N1
-Stock cible : 15Q
-Source :
-  MAT-06 (Séville 82) — A1, A2, A3 = 3Q
-  MAT-07 (Main de Dieu — match) — A1, A2, A3 = 3Q
-  MAT-08 (Finale 1994) — A1, A2, A3 = 3Q
-  MAT-11 (Finale 2006) — A1, A2, A3 = 3Q
-  MAT-13 (7-1 Brésil-Allemagne) — A1, A2, A3 = 3Q
-Total disponible : 15Q ✓
-⚠️ MAT-07 traite le MATCH — ANE-10 traite l'ANECDOTE (Main de Dieu) : angles distincts, pas de conflit
-
-## CDM-POOL-QV-05 — Finales et matchs historiques
-Stock cible : 15Q
-Source :
-  MAT-01 (Finale 1950) — A1, A2, A3, A4 = 4Q
-  MAT-02 (Finale 1966) — A1, A2, A3, A4 = 4Q
-  MAT-03 (Finale 1970) — A1, A2, A3 = 3Q
-  MAT-04 (Finale 1974) — A1, A2, A3, A4 = 4Q
-  MAT-05 (Finale 1978) — A1, A2, A3 = 3Q
-Total disponible : 18Q → retenir 15 — 3Q en réserve (pool QV-14)
-
-## CDM-POOL-QV-06 — Stades
-Stock cible : 15Q
-Source :
-  STA-01 (Maracanã) — A1, A2 = 2Q
-  STA-02 (Estadio Azteca) — A1, A2, A3 = 3Q
-  STA-03 (Wembley) — A1, A2 = 2Q
-  STA-04 (Stade de France) — A1, A2 = 2Q
-  STA-05 (Santiago Bernabéu) — A1, A2 = 2Q
-  STA-06 (Olympiastadion) — A1, A2 = 2Q
-  STA-07 (Estadio Monumental) — A1, A2 = 2Q
-Total disponible : 15Q ✓
-
-## CDM-POOL-QV-07 — Buteurs toutes éditions
-Stock cible : 15Q
-Source :
-  BUT-03 (Gerd Müller 14 buts) — A1, A2, A3 = 3Q
-  BUT-04 (Fontaine 13 buts) — A1, A2 = 2Q
-  BUT-06 (Pelé 12 buts) — A1, A2 = 2Q
-  BUT-07 (Mbappé 12 buts) — A1, A2, A3 = 3Q
-  BUT-08 (Kocsis 11 buts) — A1, A2, A3 = 3Q
-  BUT-09 (Klinsmann 11 buts) — A1, A2, A3 = 3Q
-  BUT-10 (Helmut Rahn 10 buts) — A1, A2 = 2Q
-Total disponible : 18Q → retenir 15
-
-## CDM-POOL-QV-08 — Meilleurs buteurs par édition
-Stock cible : 15Q
-Source :
-  BUE-01 (Fontaine 1958) — A1, A2 = 2Q
-  BUE-02 (Kocsis 1954) — A1, A2, A3 = 3Q
-  BUE-03 (Müller 1970) — A1, A2 = 2Q
-  BUE-04 (Eusébio 1966) — A1, A2, A3 = 3Q
-  BUE-05 (Stábile 1930) — A1, A2 = 2Q
-  BUE-06 (Ademir 1950) — A1, A2 = 2Q
-  BUE-07 (Ronaldo 2002) — A1, A2 = 2Q
-  BUE-08 (Harry Kane 2018) — A1, A2, A3 = 3Q
-  BUE-10 (James Rodríguez 2014) — A1, A2, A3 = 3Q
-Total disponible : 22Q → retenir 15
-
-## CDM-POOL-QV-09 — Finalistes sans titre
-Stock cible : 15Q
-Source :
-  FIN-06 (Pays-Bas) — A1, A2, A3, A4 = 4Q
-  FIN-07 (Uruguay) — A1, A2, A3 = 3Q
-  FIN-08 (Hongrie) — A1, A2, A3 = 3Q
-  FIN-09 (Tchécoslovaquie) — A1, A2, A3 = 3Q
-  FIN-10 (Angleterre) — A1, A2, A3 = 3Q
-Total disponible : 16Q → retenir 15
-
-## CDM-POOL-QV-10 — Participations des nations
-Stock cible : 15Q
-Source :
-  PAR-01 (Brésil 22 participations) — A1, A2 = 2Q
-  PAR-02 (Allemagne 20) — A1, A2 = 2Q
-  PAR-03 (Italie 18) — A1 = 1Q
-  PAR-04 (Argentine 18) — A1 = 1Q
-  PAR-05 (Mexique 17) — A1 = 1Q
-  PAR-06 (Espagne 16) — A1 = 1Q
-  PAR-07 (France 16) — A1 = 1Q
-  PAR-08 (Angleterre 16) — A1 = 1Q
-  PAR-09 (Belgique 14) — A1 = 1Q
-  PAR-10 (Uruguay 14) — A1 = 1Q
-  PAR-11 (Suisse 12) — A1 = 1Q
-  PAR-12 (Corée du Sud 11) — A1 = 1Q
-  PAR-13 (États-Unis 11) — A1 = 1Q
-  PAR-14 (Russie/URSS 11) — A1 = 1Q
-  PAR-15 (Pays-Bas 11) — A1 = 1Q
-Total disponible : 17Q → retenir 15
-
-## CDM-POOL-QV-11 — Anecdotes et polémiques N2
-Stock cible : 15Q
-Source :
-  ANE-01 (1950, discours brésilien) — A1, A2, A3 = 3Q
-  ANE-02 (1958, Pelé 17 ans) — A1, A2 = 2Q
-  ANE-03 (1966, trophée volé + Pickles) — A1, A2, A3 = 3Q
-  ANE-04 (1966, but fantôme Hurst) — A1, A2, A3 = 3Q
-  ANE-05 (1970, Coupe Jules-Rimet) — A1, A2, A3 = 3Q
-  ANE-06 (1978, maillot vert France) — A1, A2, A3 = 3Q
-  ANE-07 (1982, match de la honte) — A1, A2, A3 = 3Q
-  ANE-08 (1982, cheikh Fahad) — A1, A2, A3 = 3Q
-Total disponible : 23Q → retenir 15 — 8Q en réserve (pools QV-14 / QV-15)
-
-## CDM-POOL-QV-12 — Records et statistiques
-Stock cible : 15Q
-Source :
-  REC-01 (Plus de matchs joués) — A1, A2 = 2Q
-  REC-02 (Plus de matchs gagnés) — A1, A2 = 2Q
-  REC-03 (Joueur le plus âgé) — A1, A2, A3 = 3Q
-  REC-04 (Plus jeune joueur) — A1, A2, A3, A4 = 4Q
-  REC-05 (Plus large victoire) — A1, A2, A3 = 3Q
-  REC-06 (Match le plus prolifique) — A1, A2, A3 = 3Q
-  REC-07 (Finale la plus prolifique) — A1, A2, A3 = 3Q
-  REC-08 (Plus grande affluence) — A1, A2, A3 = 3Q
-  REC-09 (But le plus rapide) — A1, A2, A3, A4, A5 = 5Q
-Total disponible : 28Q → retenir 15 — 13Q en réserve (pool QV-15)
-
----
-
-# ⚠️ POOLS À FINALISER — TRAVAIL RESTANT
-
-## CDM-POOL-QV-13 — Joueurs complémentaires et nations
-Stock cible : 15Q
-Statut : ⚠️ À COMPLÉTER — sources provisoires
-Sources provisoires :
-  JOU-18 (Neuer) — A1, A2, A3 = 3Q
-  JOU-20 (Modrić) — A1, A2, A3 = 3Q
-  + 3Q réserve IF-ROT-01 (FIN-01 à 05, angles non retenus)
-  + 3Q réserve QV-02 (JOU-05/07/09/11/17, angles non retenus)
-  + 2Q réserve QV-01 (JOU-03/04/06/08/19, angles non retenus)
-  + 1Q réserve IF-ROT-02
-Total estimé : ~15Q ✓
-⚠️ VÉRIFIER : identifier précisément les angles réserve disponibles dans ANGIPREGEN_CDM.txt
-
-## CDM-POOL-QV-14 — Grands moments oubliés
-Stock cible : 15Q
-Statut : ⚠️ À COMPLÉTER — sources provisoires
-Sources provisoires :
-  MAT-10 (Demi 2002 Allemagne-Corée) — A1, A2 = 2Q
-  MAT-12 (Finale 2010 Espagne-Pays-Bas) — A1, A2, A3 = 3Q
-  ANE-12 (Corée du Sud 2002) — A1, A2, A3 = 3Q
-  ANE-15 (Humiliation Brésil 2014) — A1, A2, A3 = 3Q
-  + 3Q réserve IF-ROT-03 (ANE-09/10/11/13/14, angles non retenus)
-  + 1Q réserve IF-SF-02 (MAT-15 A3 écarté)
-Total estimé : ~15Q ✓
-⚠️ VÉRIFIER : confirmer que ANE-15 ne crée pas de conflit avec QV-04 (MAT-13)
-
-## CDM-POOL-QV-15 — Records et faits insolites (suite)
-Stock cible : 15Q
-Statut : ⚠️ À COMPLÉTER — sources provisoires
-Sources provisoires :
-  + 13Q réserve QV-12 (REC-01 à 09, angles non retenus)
-  + 2Q réserve QV-11 (ANE, angles non retenus)
-Total estimé : ~15Q ✓
-⚠️ VÉRIFIER : s'assurer que les angles réserve REC ne créent pas de doublon avec QV-12
-⚠️ Envisager de renommer ce pool "Records historiques" pour distinction claire avec QV-12 "Records et statistiques"
-
----
-
-# RÉCAPITULATIF DES CONFLITS À RÉSOUDRE
-
-| Conflit | Pool concerné | Action |
-|---------|---------------|--------|
-| JOU-11 angle BUT → réservé BUT-01 | QV-02 | Exclure angle BUT de JOU-11 dans QV-02 |
-| JOU-17 angle REC → réservé REC-01 | QV-02 | Exclure angle REC de JOU-17 dans QV-02 |
-| MAT-15 A3 (Duel Messi-Mbappé) | IF-SF-02 | Écarté — à placer en QV-14 si pertinent |
-| BUT-06 (Pelé buts) conflit IF-SF-01 | QV-07 | Vérifier distinction angles : IF-SF-01 = titres/participations / QV-07 = stats buts |
-| ANE-15 vs MAT-13 | QV-14 vs QV-04 | Angles distincts : QV-04 = le match / QV-14 = le contexte humiliation |
-| QV-15 overlap potentiel avec QV-12 | QV-15 | Définir les angles réserve précis avant génération |
-
----
-
-# VALIDATION REQUISE AVANT GÉNÉRATION
-
-- [ ] Confirmer les 20 thèmes de pools
-- [ ] Valider QV-13 / QV-14 / QV-15 (sources provisoires)
-- [ ] Résoudre les 6 conflits listés ci-dessus
-- [ ] Vérifier le total : 277Q exactement
-- [ ] Vérifier qu'aucun angle n'est assigné à deux pools différents
+## Validation
+Structure V2 validée pour industrialisation FACTORY.
