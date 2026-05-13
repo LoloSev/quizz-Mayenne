@@ -1,254 +1,87 @@
-# HISTORIQUE DES INTERVENTIONS
+# BIPREGEN_CDM - RMGÈGES DE GÉNÉRATION IA
 
-## État initial du document
+## Objectif
 
-Le fichier `BIB_CDM.txt` était une base de connaissances brute sur la Coupe du Monde, organisée en 9 sections thématiques. Chaque item portait un indicateur de difficulté en fin de ligne (F / I / D). Certains items s'étendaient sur plusieurs lignes. Aucun système de codage, aucune statistique, aucune légende.
-
-## Actions réalisées
-
-1. Mise en ligne unique — Sections 3 (Matchs) et 4 (Buteurs)
-2. Tableau STATISTIQUES — Comptage des items par section et par niveau
-3. Proportions — Colonnes "% réel" et "% cible (règles FACTORY)"
-4. Ligne "Questions à extraire" — Objectif 300 questions (120/120/60)
-5. Reclassement de 4 items N1 → N2 : CDM-JOU-18 (Neuer), CDM-JOU-20 (Modrić), CDM-MAT-12 (Finale 2010), CDM-FIN-10 (Angleterre)
-6. Codage de chaque item — `CDM-[CAT]-[N°]-[NIV]`
-7. LÉGENDE ajoutée
-8. INDEX PAR NIVEAU ajouté avec quotas
+Standardiser la génération de questions CDM afin de:
+- stabiliser la qualité
+- éviter les dérives langagières
+- rendre la génération industrialisable
+- garantir l'unicité des questions
 
 ---
 
-# LÉGENDE
+## Format obligatoire d'une question
 
-## Format du code
-`CDM-[CAT]-[N°]-[NIV]`
+QUESTION=
+REPONSE_JEUNESSE=
+REPONSE_FINALE=
+DIFFICULTE=
+POOL=
+ANGLE_ID=
+TAGS=
 
-| Champ | Détail |
-|-------|--------|
-| `CDM` | Quiz Coupe du Monde |
-| `CAT` | Catégorie |
-| `N°`  | Numéro d'item dans la catégorie (01, 02...) |
-| `NIV` | Niveau de difficulté (N1 / N2 / N3) |
-
-## Catégories
-
-| Code  | Section |
-|-------|---------|
-| `JOU` | Joueurs |
-| `STA` | Stades |
-| `MAT` | Matchs |
-| `BUT` | Buteurs toutes éditions |
-| `BUE` | Meilleurs buteurs par édition |
-| `FIN` | Finalistes |
-| `PAR` | Participations |
-| `ANE` | Anecdotes / Polémiques |
-| `REC` | Records |
-
-## Niveaux
-
-| Code | Signification |
-|------|---------------|
-| `N1` | Niveau 1 — Facile |
-| `N2` | Niveau 2 — Intermédiaire |
-| `N3` | Niveau 3 — Difficile |
+Toute question générée doit référencer :
+- son pool
+- son angle
+- son niveau
+- son type documentaire
 
 ---
 
-# 1. Joueurs
+## Règles de rédaction
 
-CDM-JOU-01-N1 — Pelé — Brésil — 4 part. (1958, 1962, 1966, 1970) — 3 CDM (1958, 1962, 1970) — 12 buts — Niveau 1
-CDM-JOU-02-N1 — Diego Maradona — Argentine — 4 part. (1982, 1986, 1990, 1994) — 1 CDM (1986) — 8 buts — Niveau 1
-CDM-JOU-03-N1 — Lionel Messi — Argentine — 5 part. (2006, 2010, 2014, 2018, 2022) — 1 CDM (2022) — 13 buts — Niveau 1
-CDM-JOU-04-N1 — Cristiano Ronaldo — Portugal — 5 part. (2006, 2010, 2014, 2018, 2022) — 0 CDM — 8 buts — Niveau 1
-CDM-JOU-05-N2 — Johan Cruyff — Pays-Bas — 1 part. (1974) — 0 CDM — 3 buts — Niveau 2
-CDM-JOU-06-N1 — Zinedine Zidane — France — 3 part. (1998, 2002, 2006) — 1 CDM (1998) — 5 buts — Niveau 1
-CDM-JOU-07-N2 — Franz Beckenbauer — Allemagne — 3 part. (1966, 1970, 1974) — 1 CDM (1974) — 5 buts — Niveau 2
-CDM-JOU-08-N1 — Ronaldo Nazário — Brésil — 4 part. (1994, 1998, 2002, 2006) — 2 CDM (1994, 2002) — 15 buts — Niveau 1
-CDM-JOU-09-N2 — Michel Platini — France — 3 part. (1978, 1982, 1986) — 0 CDM — 5 buts — Niveau 2
-CDM-JOU-10-N3 — Alfredo Di Stéfano — Argentine/Espagne — 0 part. — 0 CDM — 0 but — Niveau 3
-CDM-JOU-11-N2 — Miroslav Klose — Allemagne — 4 part. (2002, 2006, 2010, 2014) — 1 CDM (2014) — 16 buts — Niveau 2
-CDM-JOU-12-N2 — Just Fontaine — France — 1 part. (1958) — 0 CDM — 13 buts — Niveau 2
-CDM-JOU-13-N3 — Paolo Rossi — Italie — 3 part. (1978, 1982, 1986) — 1 CDM (1982) — 9 buts — Niveau 3
-CDM-JOU-14-N2 — Gerd Müller — Allemagne — 2 part. (1970, 1974) — 1 CDM (1974) — 14 buts — Niveau 2
-CDM-JOU-15-N3 — Garrincha — Brésil — 3 part. (1958, 1962, 1966) — 2 CDM (1958, 1962) — 5 buts — Niveau 3
-CDM-JOU-16-N3 — Bobby Charlton — Angleterre — 4 part. (1958, 1962, 1966, 1970) — 1 CDM (1966) — 4 buts — Niveau 3
-CDM-JOU-17-N2 — Lothar Matthäus — Allemagne — 5 part. (1982, 1986, 1990, 1994, 1998) — 1 CDM (1990) — 6 buts — Niveau 2
-CDM-JOU-18-N2 — Manuel Neuer — Allemagne — 4 part. (2010, 2014, 2018, 2022) — 1 CDM (2014) — 0 but — Niveau 2
-CDM-JOU-19-N1 — Kylian Mbappé — France — 2 part. (2018, 2022) — 1 CDM (2018) — 12 buts — Niveau 1
-CDM-JOU-20-N2 — Luka Modrić — Croatie — 4 part. (2006, 2014, 2018, 2022) — 0 CDM — 2 buts — Niveau 2
-
-# 2. Stades
-
-CDM-STA-01-N1 — Maracanã (Brésil) — finales : 1950 (~199 854 spectateurs), 2014 (~74 738) — Niveau 1
-CDM-STA-02-N2 — Estadio Azteca (Mexique) — finales : 1970 (~107 412), 1986 (~114 600) — Niveau 2
-CDM-STA-03-N1 — Wembley Stadium (Angleterre) — finale : 1966 (~96 924) — Niveau 1
-CDM-STA-04-N1 — Stade de France (France) — finale : 1998 (~80 000) — Niveau 1
-CDM-STA-05-N1 — Santiago Bernabéu Stadium (Espagne) — finale : 1982 (~90 000) — Niveau 1
-CDM-STA-06-N3 — Olympiastadion (Allemagne) — finale : 1974 (~75 200) — Niveau 3
-CDM-STA-07-N2 — Estadio Monumental (Argentine) — finale : 1978 (~71 500) — Niveau 2
-
-# 3. Matchs
-
-CDM-MAT-01-N2 — Finale 1950 — Brésil vs Uruguay — Le "Maracanazo", silence monumental au Maracanã après la victoire surprise de l'Uruguay. — Niveau 2
-CDM-MAT-02-N2 — Finale 1966 — Angleterre vs Allemagne de l'Ouest — Finale du but fantôme de Geoff Hurst à Wembley. — Niveau 2
-CDM-MAT-03-N2 — Finale 1970 — Brésil vs Italie — Apogée du Brésil de Pelé, considéré comme l'une des plus grandes équipes de l'histoire. — Niveau 2
-CDM-MAT-04-N3 — Finale 1974 — Allemagne de l'Ouest vs Pays-Bas — Affrontement entre le "football total" néerlandais et le réalisme allemand. — Niveau 3
-CDM-MAT-05-N3 — Finale 1978 — Argentine vs Pays-Bas — Premier sacre argentin dans une ambiance politique extrêmement tendue. — Niveau 3
-CDM-MAT-06-N1 — Demi-finale 1982 — France vs Allemagne de l'Ouest — "Séville 82", traumatisme français et premier grand match décidé aux tirs au but en demi-finale. — Niveau 1
-CDM-MAT-07-N1 — Quart de finale 1986 — Argentine vs Angleterre — Match de la "Main de Dieu" et du "But du siècle" de Maradona. — Niveau 1
-CDM-MAT-08-N2 — Finale 1994 — Brésil vs Italie — Première finale décidée aux tirs au but, avec le raté historique de Baggio. — Niveau 2
-CDM-MAT-09-N1 — Finale 1998 — France vs Brésil — Premier titre mondial de la France grâce au doublé de Zidane. — Niveau 1
-CDM-MAT-10-N2 — Demi-finale 2002 — Allemagne vs Corée du Sud — Fin de l'épopée historique sud-coréenne à domicile. — Niveau 2
-CDM-MAT-11-N1 — Finale 2006 — Italie vs France — Dernier match de Zidane marqué par son coup de tête sur Materazzi. — Niveau 1
-CDM-MAT-12-N2 — Finale 2010 — Espagne vs Pays-Bas — Consécration du tiki-taka espagnol avec le but d'Iniesta. — Niveau 2
-CDM-MAT-13-N1 — Demi-finale 2014 — Brésil vs Allemagne — Le légendaire "7-1", humiliation historique du Brésil à domicile. — Niveau 1
-CDM-MAT-14-N1 — Finale 2018 — France vs Croatie — Deuxième étoile française après un tournoi maîtrisé. — Niveau 1
-CDM-MAT-15-N1 — Finale 2022 — Argentine vs France — Duel mythique Messi–Mbappé, souvent considéré comme la plus grande finale de l'histoire. — Niveau 1
-
-# 4. Buteurs (toutes éditions confondues)
-
-CDM-BUT-01-N2 — Miroslav Klose (Allemagne) — 16 buts — 2002 : 5 / 2006 : 5 / 2010 : 4 / 2014 : 2 — Niveau 2
-CDM-BUT-02-N1 — Ronaldo (Brésil) — 15 buts — 1998 : 4 / 2002 : 8 / 2006 : 3 — Niveau 1
-CDM-BUT-03-N2 — Gerd Müller (Allemagne de l'Ouest) — 14 buts — 1970 : 10 / 1974 : 4 — Niveau 2
-CDM-BUT-04-N2 — Just Fontaine (France) — 13 buts — 1958 : 13 — Niveau 2
-CDM-BUT-05-N1 — Lionel Messi (Argentine) — 13 buts — 2006 : 1 / 2014 : 4 / 2018 : 1 / 2022 : 7 — Niveau 1
-CDM-BUT-06-N1 — Pelé (Brésil) — 12 buts — 1958 : 6 / 1962 : 1 / 1970 : 5 — Niveau 1
-CDM-BUT-07-N1 — Kylian Mbappé (France) — 12 buts — 2018 : 4 / 2022 : 8 — Niveau 1
-CDM-BUT-08-N3 — Sándor Kocsis (Hongrie) — 11 buts — 1954 : 11 — Niveau 3
-CDM-BUT-09-N2 — Jürgen Klinsmann (Allemagne) — 11 buts — 1990 : 3 / 1994 : 5 / 1998 : 3 — Niveau 2
-CDM-BUT-10-N3 — Helmut Rahn (Allemagne de l'Ouest) — 10 buts — 1954 : 4 / 1958 : 6 — Niveau 3
-
-# 5. Meilleurs Buteurs dans une seule édition
-
-CDM-BUE-01-N2 — Just Fontaine (France) — 13 buts — 1958 — Niveau 2
-CDM-BUE-02-N3 — Sándor Kocsis (Hongrie) — 11 buts — 1954 — Niveau 3
-CDM-BUE-03-N2 — Gerd Müller (Allemagne de l'Ouest) — 10 buts — 1970 — Niveau 2
-CDM-BUE-04-N2 — Eusébio (Portugal) — 9 buts — 1966 — Niveau 2
-CDM-BUE-05-N3 — Guillermo Stábile (Argentine) — 8 buts — 1930 — Niveau 3
-CDM-BUE-06-N3 — Ademir (Brésil) — 8 buts — 1950 — Niveau 3
-CDM-BUE-07-N1 — Ronaldo (Brésil) — 8 buts — 2002 — Niveau 1
-CDM-BUE-08-N1 — Harry Kane (Angleterre) — 6 buts — 2018 — Niveau 1
-CDM-BUE-09-N1 — Kylian Mbappé (France) — 8 buts — 2022 — Niveau 1
-CDM-BUE-10-N1 — James Rodríguez (Colombie) — 6 buts — 2014 — Niveau 1
-
-# 6. Finalistes
-
-CDM-FIN-01-N1 — Allemagne — 8 finales : 1954 (V), 1966 (D), 1974 (V), 1982 (D), 1986 (D), 1990 (V), 2002 (D), 2014 (V) — Niveau 1
-CDM-FIN-02-N1 — Brésil — 7 finales : 1950 (D), 1958 (V), 1962 (V), 1970 (V), 1994 (V), 1998 (D), 2002 (V) — Niveau 1
-CDM-FIN-03-N1 — Italie — 6 finales : 1934 (V), 1938 (V), 1970 (D), 1982 (V), 1994 (D), 2006 (V) — Niveau 1
-CDM-FIN-04-N1 — Argentine — 6 finales : 1930 (D), 1978 (V), 1986 (V), 1990 (D), 2014 (D), 2022 (V) — Niveau 1
-CDM-FIN-05-N1 — France — 4 finales : 1998 (V), 2006 (D), 2018 (V), 2022 (D) — Niveau 1
-CDM-FIN-06-N2 — Pays-Bas — 3 finales : 1974 (D), 1978 (D), 2010 (D) — Niveau 2
-CDM-FIN-07-N2 — Uruguay — 2 finales : 1930 (V), 1950 (V) — Niveau 2
-CDM-FIN-08-N3 — Hongrie — 2 finales : 1938 (D), 1954 (D) — Niveau 3
-CDM-FIN-09-N3 — Tchécoslovaquie — 2 finales : 1934 (D), 1962 (D) — Niveau 3
-CDM-FIN-10-N2 — Angleterre — 1 finale : 1966 (V) — Niveau 2
-
-# 7. Participations (22 éditions jouées)
-
-CDM-PAR-01-N1 — Brésil — 22 participations — Niveau 1
-CDM-PAR-02-N1 — Allemagne — 20 participations — Niveau 1
-CDM-PAR-03-N2 — Italie — 18 participations — Niveau 2
-CDM-PAR-04-N2 — Argentine — 18 participations — Niveau 2
-CDM-PAR-05-N2 — Mexique — 17 participations — Niveau 2
-CDM-PAR-06-N1 — Espagne — 16 participations — Niveau 1
-CDM-PAR-07-N1 — France — 16 participations — Niveau 1
-CDM-PAR-08-N1 — Angleterre — 16 participations — Niveau 1
-CDM-PAR-09-N2 — Belgique — 14 participations — Niveau 2
-CDM-PAR-10-N2 — Uruguay — 14 participations — Niveau 2
-CDM-PAR-11-N3 — Suisse — 12 participations — Niveau 3
-CDM-PAR-12-N3 — Corée du Sud — 11 participations — Niveau 3
-CDM-PAR-13-N2 — États-Unis — 11 participations — Niveau 2
-CDM-PAR-14-N3 — Russie / URSS — 11 participations — Niveau 3
-CDM-PAR-15-N2 — Pays-Bas — 11 participations — Niveau 2
-
-# 8. Anecdotes / Polémiques
-
-CDM-ANE-01-N2 — 1950 — Le Brésil avait déjà préparé le discours du titre avant la finale perdue contre l'Uruguay au Maracanã. — Niveau 2
-CDM-ANE-02-N1 — 1958 — Pelé remporte sa première Coupe du monde à seulement 17 ans. — Niveau 1
-CDM-ANE-03-N2 — 1966 — Le trophée de la Coupe du monde est volé en Angleterre puis retrouvé par un chien nommé Pickles. — Niveau 2
-CDM-ANE-04-N2 — 1966 — Le but accordé à Geoff Hurst en finale Angleterre–Allemagne reste l'une des plus grandes controverses de l'histoire. — Niveau 2
-CDM-ANE-05-N2 — 1970 — Le Brésil conserve définitivement la Coupe Jules-Rimet après son troisième sacre mondial. — Niveau 2
-CDM-ANE-06-N3 — 1978 — La France joue contre la Hongrie avec un improbable maillot vert et blanc emprunté au club argentin Kimberley. — Niveau 3
-CDM-ANE-07-N2 — 1982 — Le "match de la honte" Allemagne de l'Ouest–Autriche voit les deux équipes quasiment arrêter de jouer pour éliminer l'Algérie. — Niveau 2
-CDM-ANE-08-N3 — 1982 — Le cheikh Fahad Al-Ahmad descend sur la pelouse pendant France–Koweït pour faire annuler un but français. — Niveau 3
-CDM-ANE-09-N1 — 1982 — Le gardien allemand Schumacher percute Battiston sans recevoir de carton, scandalisant le monde entier. — Niveau 1
-CDM-ANE-10-N1 — 1986 — Maradona inscrit dans le même match la "Main de Dieu" et le "But du siècle" contre l'Angleterre. — Niveau 1
-CDM-ANE-11-N1 — 1994 — Roberto Baggio rate le tir au but décisif lors de la première finale de Coupe du monde décidée aux penalties. — Niveau 1
-CDM-ANE-12-N2 — 2002 — La Corée du Sud devient la première sélection asiatique à atteindre une demi-finale. — Niveau 2
-CDM-ANE-13-N1 — 2006 — Zidane est expulsé en finale après son coup de tête sur Materazzi. — Niveau 1
-CDM-ANE-14-N1 — 2010 — Paul le Poulpe devient une célébrité mondiale après avoir prédit tous les résultats de l'Allemagne. — Niveau 1
-CDM-ANE-15-N1 — 2014 — Le Brésil subit à domicile la pire défaite de son histoire avec le 7-1 contre l'Allemagne. — Niveau 1
-
-# 9. Autres records
-
-CDM-REC-01-N2 — Plus grand nombre de matchs joués — Lothar Matthäus (Allemagne) — 25 matchs. — Niveau 2
-CDM-REC-02-N2 — Plus grand nombre de matchs gagnés en CdM — Miroslav Klose (Allemagne) — 17. — Niveau 2
-CDM-REC-03-N3 — Joueur le plus âgé — Essam El-Hadary (Égypte) — 45 ans en 2018. — Niveau 3
-CDM-REC-04-N3 — Plus jeune joueur — Norman Whiteside (Irlande du Nord) — 17 ans en 1982. — Niveau 3
-CDM-REC-05-N3 — Plus large victoire — Hongrie 10-1 Salvador — 1982. — Niveau 3
-CDM-REC-06-N3 — Match avec le plus de buts — Autriche 7-5 Suisse — 1954 (12 buts). — Niveau 3
-CDM-REC-07-N1 — Finale la plus prolifique — France 4-2 Croatie — 2018 (6 buts). — Niveau 1
-CDM-REC-08-N2 — Plus grande affluence — Brésil–Uruguay 1950 au Maracanã — ~199 854 spectateurs. — Niveau 2
-CDM-REC-09-N2 — But le plus rapide de l'histoire — Hakan Şükür (Turquie) contre la Corée du Sud — 2002 — 11 secondes. — Niveau 2
+- Une seule information centrale par question
+- Phormes courtes et directes
+- Pas de phérase ambiguë
+- Pas de tournure Wikipédique
+- Pas de contexte inutile
+- Pas de date incluse si elle n'est pas l'objet de la question
 
 ---
 
-# STATISTIQUES DU DOCUMENT
+## Règles de difficulté
 
-| Section                          | Niveau 1 | Niveau 2 | Niveau 3 | Total |
-|----------------------------------|----------|----------|----------|-------|
-| 1. Joueurs                       |    7     |    9     |    4     |  20   |
-| 2. Stades                        |    4     |    2     |    1     |   7   |
-| 3. Matchs                        |    7     |    6     |    2     |  15   |
-| 4. Buteurs (toutes éditions)     |    4     |    4     |    2     |  10   |
-| 5. Meilleurs buteurs / édition   |    4     |    3     |    3     |  10   |
-| 6. Finalistes                    |    5     |    3     |    2     |  10   |
-| 7. Participations                |    5     |    7     |    3     |  15   |
-| 8. Anecdotes / Polémiques        |    7     |    6     |    2     |  15   |
-| 9. Autres records                |    1     |    4     |    4     |   9   |
-| **TOTAL**                        |  **44**  |  **44**  |  **23**  | **111** |
-| **% réel**                       | **40%**  | **40%**  | **20%**  | 100%  |
-| **% cible (règles FACTORY)**     | **40%**  | **40%**  | **20%**  | 100%  |
-| **Questions à extraire**         | **120**  | **120**  |  **60**  | **300** |
+### N1
+- Questions directes
+- Nams connus
+- Aucun piège langagier
+- Réponses souvent uniques
+
+### N2
+- Croisement de deux infos
+- Confisions possibles
+- Distracteurs cédébles
+
+### N3
+- Questions d'analyse
+- Dérails historiques
+- Possible transversal multi-items
 
 ---
 
-# INDEX PAR NIVEAU
+## Règles de distracteurs
 
-## Niveau 1 (44 items — 120 questions à extraire)
+- 3 distracteurs maximum
+- Mjême catégorie de réponse
+- Niveau de crédibilité homogène
+- Aucun distracteur absurde
+- Aucun distracteur hors sujet
 
-CDM-JOU-01-N1 (quota:4) | CDM-JOU-02-N1 (quota:4) | CDM-JOU-03-N1 (quota:4) | CDM-JOU-04-N1 (quota:3) | CDM-JOU-06-N1 (quota:3)
-CDM-JOU-08-N1 (quota:3) | CDM-JOU-19-N1 (quota:4)
-CDM-STA-01-N1 (quota:2) | CDM-STA-03-N1 (quota:2) | CDM-STA-04-N1 (quota:2) | CDM-STA-05-N1 (quota:2)
-CDM-MAT-06-N1 (quota:3) | CDM-MAT-07-N1 (quota:3) | CDM-MAT-09-N1 (quota:3) | CDM-MAT-11-N1 (quota:3) | CDM-MAT-13-N1 (quota:3) | CDM-MAT-14-N1 (quota:3) | CDM-MAT-15-N1 (quota:3)
-CDM-BUT-02-N1 (quota:3) | CDM-BUT-05-N1 (quota:3) | CDM-BUT-06-N1 (quota:2) | CDM-BUT-07-N1 (quota:3)
-CDM-BUE-07-N1 (quota:2) | CDM-BUE-08-N1 (quota:3) | CDM-BUE-09-N1 (quota:3) | CDM-BUE-10-N1 (quota:3)
-CDM-FIN-01-N1 (quota:3) | CDM-FIN-02-N1 (quota:3) | CDM-FIN-03-N1 (quota:3) | CDM-FIN-04-N1 (quota:3) | CDM-FIN-05-N1 (quota:3)
-CDM-PAR-01-N1 (quota:2) | CDM-PAR-02-N1 (quota:2) | CDM-PAR-06-N1 (quota:1) | CDM-PAR-07-N1 (quota:1) | CDM-PAR-08-N1 (quota:1)
-CDM-ANE-02-N1 (quota:2) | CDM-ANE-09-N1 (quota:3) | CDM-ANE-10-N1 (quota:3) | CDM-ANE-11-N1 (quota:3) | CDM-ANE-13-N1 (quota:3) | CDM-ANE-14-N1 (quota:3) | CDM-ANE-15-N1 (quota:3)
-CDM-REC-07-N1 (quota:3)
+---
 
-## Niveau 2 (44 items — 120 questions à extraire)
+## Règles d'unicité
 
-CDM-JOU-05-N2 (quota:3) | CDM-JOU-07-N2 (quota:4) | CDM-JOU-09-N2 (quota:4) | CDM-JOU-11-N2 (quota:3) | CDM-JOU-12-N2 (quota:3)
-CDM-JOU-14-N2 (quota:3) | CDM-JOU-17-N2 (quota:4) | CDM-JOU-18-N2 (quota:3) | CDM-JOU-20-N2 (quota:3)
-CDM-STA-02-N2 (quota:3) | CDM-STA-07-N2 (quota:2)
-CDM-MAT-01-N2 (quota:4) | CDM-MAT-02-N2 (quota:4) | CDM-MAT-03-N2 (quota:3) | CDM-MAT-08-N2 (quota:3) | CDM-MAT-10-N2 (quota:2) | CDM-MAT-12-N2 (quota:3)
-CDM-BUT-01-N2 (quota:4) | CDM-BUT-03-N2 (quota:3) | CDM-BUT-04-N2 (quota:2) | CDM-BUT-09-N2 (quota:3)
-CDM-BUE-01-N2 (quota:2) | CDM-BUE-03-N2 (quota:2) | CDM-BUE-04-N2 (quota:3)
-CDM-FIN-06-N2 (quota:4) | CDM-FIN-07-N2 (quota:3) | CDM-FIN-10-N2 (quota:3)
-CDM-PAR-03-N2 (quota:1) | CDM-PAR-04-N2 (quota:1) | CDM-PAR-05-N2 (quota:1) | CDM-PAR-09-N2 (quota:1) | CDM-PAR-10-N2 (quota:1) | CDM-PAR-13-N2 (quota:1) | CDM-PAR-15-N2 (quota:1)
-CDM-ANE-01-N2 (quota:3) | CDM-ANE-03-N2 (quota:3) | CDM-ANE-04-N2 (quota:3) | CDM-ANE-05-N2 (quota:3) | CDM-ANE-07-N2 (quota:3) | CDM-ANE-12-N2 (quota:3)
-CDM-REC-01-N2 (quota:2) | CDM-REC-02-N2 (quota:2) | CDM-REC-08-N2 (quota:3) | CDM-REC-09-N2 (quota:5)
+- Un angle = une question principale
+- Pas de déponse dupliquée dans un même pool
+- Pas de variantes quasi-dupliquées
+- Un fait majeur ne doit pas servir à plus de deux questions
 
-## Niveau 3 (23 items — 60 questions à extraire)
+---
 
-CDM-JOU-10-N3 (quota:2) | CDM-JOU-13-N3 (quota:3) | CDM-JOU-15-N3 (quota:3) | CDM-JOU-16-N3 (quota:3)
-CDM-STA-06-N3 (quota:2)
-CDM-MAT-04-N3 (quota:4) | CDM-MAT-05-N3 (quota:3)
-CDM-BUT-08-N3 (quota:3) | CDM-BUT-10-N3 (quota:2)
-CDM-BUE-02-N3 (quota:3) | CDM-BUE-05-N3 (quota:2) | CDM-BUE-06-N3 (quota:2)
-CDM-FIN-08-N3 (quota:3) | CDM-FIN-09-N3 (quota:3)
-CDM-PAR-11-N3 (quota:1) | CDM-PAR-12-N3 (quota:1) | CDM-PAR-14-N3 (quota:1)
-CDM-ANE-06-N3 (quota:3) | CDM-ANE-08-N3 (quota:3)
-CDM-REC-03-N3 (quota:3) | CDM-REC-04-N3 (quota:4) | CDM-REC-05-N3 (quota:3) | CDM-REC-06-N3 (quota:3)
+## Règles de sortie IA
+
+- Ton neutre
+- Pas d'humour
+- Pas de commentaire
+- Pas d'explication
+- Sortie exploitable directement par pipeline
