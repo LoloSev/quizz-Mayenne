@@ -1,3 +1,0 @@
-# 01_construction_base_connaissances_mayenne
-
-Base spécifique Quiz Mayenne.
